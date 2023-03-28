@@ -3,9 +3,14 @@ import CompaniesDB from "@src/models/Companies";
 // **** Init **** //
 
 const router = Router();
-
+router.get("/", async (req, res) => {
+    const companies = await CompaniesDB.find();
+    return res.json({ state: false, message: "Success", data: companies });
+});
 router.get("/:name", async (req, res) => {
-    const company = await CompaniesDB.findOne({ name: req.params.name.split("-").join(" ") }).hint({
+    const company = await CompaniesDB.findOne({
+        name: req.params.name.split("-").join(" "),
+    }).hint({
         name: 1,
     });
     if (!company)
@@ -15,10 +20,7 @@ router.get("/:name", async (req, res) => {
 
     return res.json({ state: false, message: "Success", data: company });
 });
-router.get("/", async (req, res) => {
-    const companies = await CompaniesDB.find()
-    return res.json({ state: false, message: "Success", data: companies });
-});
+
 // **** Export default **** //
 
 export default router;

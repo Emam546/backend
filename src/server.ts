@@ -11,13 +11,15 @@ import EnvVars from "@src/declarations/major/EnvVars";
 import HttpStatusCodes from "@src/declarations/major/HttpStatusCodes";
 import { NodeEnvs } from "@src/declarations/enums";
 import { RouteError } from "@src/declarations/classes";
-
+import cors from "cors";
 // **** Init express **** //
 
 const app = express();
 
 // **** Set basic express settings **** //
-
+if (EnvVars.nodeEnv == NodeEnvs.Dev)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(EnvVars.cookieProps.secret));
@@ -41,11 +43,6 @@ if (EnvVars.nodeEnv === NodeEnvs.Production) {
 
 // Add APIs
 app.use("/api", BaseRouter);
-app.use(
-    expressWinstom.errorLogger({
-        winstonInstance: logger,
-    })
-);
 // Setup error handler
 app.use(
     (
@@ -55,8 +52,8 @@ app.use(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: NextFunction
     ) => {
-        logger.error(err.message, true);
-        let status = HttpStatusCodes.BAD_REQUEST;
+        logger.error(err.message,);
+        let status = 504;
         if (err instanceof RouteError) {
             status = err.status;
         }
@@ -66,29 +63,13 @@ app.use(
 
 // **** Serve front-end content **** //
 
-// Set views directory (html)
-const viewsDir = path.join(__dirname, "views");
-app.set("views", viewsDir);
-
 // Set static directory (js and css).
 const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
-
-// Nav to login pg by default
-app.get("/", (_: Request, res: Response) => {
-    res.sendFile("login.html", { root: viewsDir });
+app.use("/src", express.static("./images"));
+app.use((req, res) => {
+    res.status(404).json({ status: false, msg: "page is not exist" });
 });
-
-// Redirect to login if not logged in.
-app.get("/users", (req: Request, res: Response) => {
-    const jwt = req.signedCookies[EnvVars.cookieProps.key];
-    if (!jwt) {
-        res.redirect("/");
-    } else {
-        res.sendFile("users.html", { root: viewsDir });
-    }
-});
-
 // **** Export default **** //
 
 export default app;

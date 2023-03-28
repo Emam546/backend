@@ -69,7 +69,7 @@
     "src/**/*.ts",
     "spec/**/*.ts",
     "build.ts",
-    "utils/data.ts"
+    "data/**/*.ts"
   ],
   "exclude": [
     "src/public/"

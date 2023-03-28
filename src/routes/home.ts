@@ -5,14 +5,14 @@ import FilmDB from "@src/models/film";
 
 const router = Router();
 router.get("/", async (req, res) => {
-    const companies = await CompaniesDB.find();
-    const films = await FilmDB.find();
+    const companies = await CompaniesDB.find({});
+    const headerfilms = await FilmDB.aggregate([{ $sample: { size: 7 } }]);
     return res.json({
         state: false,
         message: "Success",
         data: {
-            companies,
-            films,
+            headerfilms,
+            companies
         },
     });
 });

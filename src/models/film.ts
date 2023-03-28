@@ -16,18 +16,19 @@ const schema = new mongoose.Schema<Film>({
         required: true,
     },
     bottom: {
-        type: [String],
+        type: [Object],
         required: true,
     },
     lang: {
-        type: [String],
+        type: [Object],
         required: true,
     },
     thumbnails: {
+        type:Object,
         required: true,
     },
     head: {
-        type: [String],
+        type: [Object],
         required: true,
     },
 });
