@@ -55,7 +55,7 @@ export function getRandomValues<T>(
     num = arr.length,
     random = true
 ): T[] {
-    const res: T[] = [];
+    const res: T[] = new Array();
     for (let i = 0; i < (random ? getRandomNum(num) : num); i++) {
         // to avoid repeating
         let larr = getRandomValue(arr);

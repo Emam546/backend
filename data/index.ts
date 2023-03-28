@@ -11,7 +11,7 @@ import { changeCompData, changeFilmData, getRandomValues } from "./utils";
 
 async function UploadData() {
     async function getCompany() {
-        const comps = [];
+        const comps = new Array();
         for (const comp of dataCompany) {
             const res = await CompanyDB.findOne({ name: comp.name });
             if (!res) {
@@ -84,7 +84,7 @@ async function UploadPagesData() {
         console.log(" ",`Upload ${name}`);
         const res = await EditTitlesDB.findOne({ name });
         if (res) continue;
-        const editions: mongoose.Types.ObjectId[] = [];
+        const editions: mongoose.Types.ObjectId[] = new Array();
         for (const titleName of pages[name]) {
             const res = await new EditionDB({
                 name: titleName,
@@ -107,7 +107,7 @@ async function UploadCompanyEditions() {
         const films = await FilmDB.find({ company: company._id }).hint({
             company: 1,
         });
-        const editions: mongoose.Types.ObjectId[] = [];
+        const editions: mongoose.Types.ObjectId[] = new Array();
         for (const name of FilmsEditionsName(company.name)) {
             const res = await new EditionDB({
                 name,
