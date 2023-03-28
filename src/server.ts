@@ -15,7 +15,7 @@ import cors from "cors";
 
 const app = express();
 
-// **** Set basic express settings **** //
+// **** Set basic express settings **** //b
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cors({ origin: "*" }));
 app.use(express.json());
@@ -50,7 +50,7 @@ app.use(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: NextFunction
     ) => {
-        logger.error(err.message,);
+        logger.error(err.message);
         let status = 504;
         if (err instanceof RouteError) {
             status = err.status;
@@ -64,7 +64,8 @@ app.use(
 // Set static directory (js and css).
 const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
-app.use("/src", express.static("./images"));
+const imagesFolder = path.join(__dirname, "../images");
+app.use("/src", express.static(imagesFolder));
 app.use((req, res) => {
     res.status(404).json({ status: false, msg: "page is not exist" });
 });

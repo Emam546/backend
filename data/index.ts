@@ -17,7 +17,6 @@ async function UploadData() {
             if (!res) {
                 changeCompData(comp);
                 const ncomp = new CompanyDB(comp);
-
                 comps.push(await ncomp.save());
             } else comps.push(res);
         }
@@ -81,7 +80,7 @@ async function UploadPagesData() {
     console.log("Uploading pageData editions");
     const films = await FilmDB.find({});
     for (const name in pages) {
-        console.log(" ",`Upload ${name}`);
+        console.log(" ", `Upload ${name}`);
         const res = await EditTitlesDB.findOne({ name });
         if (res) continue;
         const editions: mongoose.Types.ObjectId[] = new Array();
