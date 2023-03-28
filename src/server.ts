@@ -8,7 +8,6 @@ import "express-async-errors";
 import expressWinstom from "express-winston";
 import BaseRouter from "./routes/api";
 import EnvVars from "@src/declarations/major/EnvVars";
-import HttpStatusCodes from "@src/declarations/major/HttpStatusCodes";
 import { NodeEnvs } from "@src/declarations/enums";
 import { RouteError } from "@src/declarations/classes";
 import cors from "cors";

@@ -6,7 +6,7 @@
     "lint": "npx eslint --ext .ts src/",
     "lint:tests": "npx eslint --ext .ts spec/",
     "start": "node -r module-alias/register ./dist --env=production",
-    "prestart": "ts-node --files -r tsconfig-paths/register ./data --env=production",
+    "postbuild": "ts-node --files -r tsconfig-paths/register ./data --env=production",
     "predev": "ts-node --files -r tsconfig-paths/register ./data",
     "dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
