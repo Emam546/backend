@@ -29,6 +29,7 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "apicache": "^1.6.3",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.35.0",
     "command-line-args": "^5.2.1",
@@ -52,6 +53,7 @@
     "winston-mongodb": "^5.1.1"
   },
   "devDependencies": {
+    "@types/apicache": "^1.6.1",
     "@types/bcrypt": "^5.0.0",
     "@types/command-line-args": "^5.2.0",
     "@types/cookie-parser": "^1.4.3",

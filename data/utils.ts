@@ -59,6 +59,7 @@ export function getRandomValues<T>(
     for (let i = 0; i < (random ? getRandomNum(num) : num); i++) {
         // to avoid repeating
         let larr = getRandomValue(arr);
+        
         while (larr == res.at(-1)) larr = getRandomValue(arr);
 
         res.push(larr);
