@@ -4,7 +4,6 @@ import EnvVars from "@src/declarations/major/EnvVars";
 import server from "./server";
 import logger from "@src/logger";
 import connect from "./db/connect";
-
 // **** Start server **** //
 
 const msg = "Express server started on port: " + EnvVars.port.toString();

@@ -1,44 +1,61 @@
 import { v4 as uuidV4 } from "uuid";
 import fs from "fs-extra";
 import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+import EnvVars from "@src/declarations/major/EnvVars";
+import { NodeEnvs } from "@src/declarations/enums";
+
 const FilePath = path.join(__dirname, "../images");
 if (!fs.existsSync(FilePath)) fs.mkdirsSync(FilePath);
-export function Copy(name: string) {
-    const filename = `${uuidV4()}${path.extname(name)}`;
-    fs.copyFileSync(path.join(__dirname, name), path.join(FilePath, filename));
-    return filename;
+export async function Copy(name: string) {
+    const orgFile = path.join(__dirname, name);
+
+    if (EnvVars.nodeEnv == NodeEnvs.Production) {
+        console.log(name);
+        const res = await cloudinary.uploader.upload(orgFile,{resource_type:"auto"});
+        return res.public_id;
+    } else {
+        const filename = `${uuidV4()}${path.extname(name)}`;
+        await fs.copy(orgFile, path.join(FilePath, filename));
+        return filename
+    }
 }
-export function changeFilmData(val: Film) {
+export async function changeFilmData(val: Film) {
     try {
-        val.thumbnails.head = Copy(val.thumbnails.head);
-        val.thumbnails.landscape = Copy(val.thumbnails.landscape);
-        val.thumbnails.portal = Copy(val.thumbnails.portal);
+        val.thumbnails.head = await Copy(val.thumbnails.head);
+        val.thumbnails.landscape = await Copy(val.thumbnails.landscape);
+        val.thumbnails.portal = await Copy(val.thumbnails.portal);
         if (val.thumbnails.headPortal)
-            val.thumbnails.headPortal = Copy(val.thumbnails.headPortal);
+            val.thumbnails.headPortal = await Copy(val.thumbnails.headPortal);
     } catch (err) {
-        Delete(val.thumbnails.head);
-        Delete(val.thumbnails.landscape);
-        Delete(val.thumbnails.portal);
-        if (val.thumbnails.headPortal) Delete(val.thumbnails.headPortal);
+        await Delete(val.thumbnails.head);
+        await Delete(val.thumbnails.landscape);
+        await Delete(val.thumbnails.portal);
+        if (val.thumbnails.headPortal) await Delete(val.thumbnails.headPortal);
         console.log(err);
         throw err;
     }
 }
-export function Delete(name: string) {
-    if (fs.existsSync(name)) fs.removeSync(name);
+export async function Delete(id: string) {
+    if (EnvVars.nodeEnv == NodeEnvs.Production) {
+        try {
+            await cloudinary.api.resource(id);
+            await cloudinary.uploader.destroy(id);
+        } catch (error) {}
+    } else if (fs.existsSync(id)) fs.removeSync(id);
 }
-export function changeCompData(val: Company) {
+export async function changeCompData(val: Company) {
     try {
-        val.thumbnail.home.image = Copy(val.thumbnail.home.image);
-        val.thumbnail.home.video = Copy(val.thumbnail.home.video);
-        val.thumbnail.main.bg = Copy(val.thumbnail.main.bg);
+        val.thumbnail.home.image = await Copy(val.thumbnail.home.image);
+        val.thumbnail.home.video = await Copy(val.thumbnail.home.video);
+        val.thumbnail.main.bg = await Copy(val.thumbnail.main.bg);
         if (val.thumbnail.main.image)
-            val.thumbnail.main.image = Copy(val.thumbnail.main.image);
+            val.thumbnail.main.image = await Copy(val.thumbnail.main.image);
     } catch (err) {
-        Delete(val.thumbnail.home.image);
-        Delete(val.thumbnail.home.video);
-        Delete(val.thumbnail.main.bg);
-        if (val.thumbnail.main.image) Delete(val.thumbnail.main.image);
+        await Delete(val.thumbnail.home.image);
+        await Delete(val.thumbnail.home.video);
+        await Delete(val.thumbnail.main.bg);
+        if (val.thumbnail.main.image) await Delete(val.thumbnail.main.image);
         console.log(err);
         throw err;
     }
@@ -59,7 +76,7 @@ export function getRandomValues<T>(
     for (let i = 0; i < (random ? getRandomNum(num) : num); i++) {
         // to avoid repeating
         let larr = getRandomValue(arr);
-        
+
         while (larr == res.at(-1)) larr = getRandomValue(arr);
 
         res.push(larr);

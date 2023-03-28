@@ -1,9 +1,10 @@
 import "@src/pre-start";
-import { FilmsEditionsName, data, dataCompany } from "./data";
+import { FilmsEditionsName, data, dataCompany, pages } from "./data";
 import FilmDB from "@src/models/film";
 import CompanyDB from "@src/models/Companies";
 import EditionDB from "@src/models/editions";
 import connect from "@src/db/connect";
+import connectcloudinary from "@src/db/cloudinary";
 import EnvVars from "@src/declarations/major/EnvVars";
 import EditTitlesDB from "@src/models/eddTitles";
 import mongoose from "mongoose";
@@ -15,7 +16,7 @@ async function UploadData() {
         for (const comp of dataCompany) {
             const res = await CompanyDB.findOne({ name: comp.name });
             if (!res) {
-                changeCompData(comp);
+                await changeCompData(comp);
                 const ncomp = new CompanyDB(comp);
                 comps.push(await ncomp.save());
             } else comps.push(res);
@@ -35,7 +36,7 @@ async function UploadData() {
                     `Company name is not exist ${val.company} ${comp}`
                 );
             val.company = comp?.id;
-            changeFilmData(val);
+            await changeFilmData(val);
             const newFilm = new FilmDB(val);
             await newFilm.save();
         }
@@ -43,39 +44,6 @@ async function UploadData() {
     console.log("Finish Upload Films Data");
 }
 
-const pages: Record<string, string[]> = {
-    home: [
-        "New to Disney+",
-        "What to Watch Tonight",
-        "Popular Shows",
-        "Popular Movies",
-        "Movies Recommended For You",
-        "Awards movies",
-        "Science Fiction",
-        "Fantasy Movies",
-        "Recently watched",
-        "Classic Movies",
-    ],
-    series: [
-        "Comedy Series",
-        "Drama Series",
-        "Science Fiction",
-        "Adult Animation",
-        "Horror",
-        "Documentaries and Reality",
-    ],
-    movies: [
-        "Action and Adventure",
-        "Comedy Movies",
-        "Drama Movies",
-        "Romantic Movies",
-        "Animated Movies",
-        "Science Fiction",
-        "Horror",
-        "Stories Matter",
-    ],
-    originals: ["Series", "Movies", "Shorts", "Specials"],
-};
 async function UploadPagesData() {
     console.log("Uploading pageData editions");
     const films = await FilmDB.find({});
@@ -126,6 +94,7 @@ async function UploadCompanyEditions() {
 
 (async function () {
     await connect(EnvVars.MONGODB_URL, true);
+    connectcloudinary();
     await UploadData();
     await UploadPagesData();
     await UploadCompanyEditions();

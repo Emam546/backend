@@ -696,7 +696,6 @@ export const dataCompany: Company[] = [
     },
 ];
 
-
 export function FilmsEditionsName(name: string) {
     return [
         "Featured",
@@ -714,3 +713,36 @@ export function FilmsEditionsName(name: string) {
         `${name} and Reality`,
     ];
 }
+export const pages: Record<string, string[]> = {
+    home: [
+        "New to Disney+",
+        "What to Watch Tonight",
+        "Popular Shows",
+        "Popular Movies",
+        "Movies Recommended For You",
+        "Awards movies",
+        "Science Fiction",
+        "Fantasy Movies",
+        "Recently watched",
+        "Classic Movies",
+    ],
+    series: [
+        "Comedy Series",
+        "Drama Series",
+        "Science Fiction",
+        "Adult Animation",
+        "Horror",
+        "Documentaries and Reality",
+    ],
+    movies: [
+        "Action and Adventure",
+        "Comedy Movies",
+        "Drama Movies",
+        "Romantic Movies",
+        "Animated Movies",
+        "Science Fiction",
+        "Horror",
+        "Stories Matter",
+    ],
+    originals: ["Series", "Movies", "Shorts", "Specials"],
+};

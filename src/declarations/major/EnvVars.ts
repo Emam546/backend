@@ -20,9 +20,9 @@ export default {
         exp: process.env.COOKIE_EXP ?? "", // exp at the same time as the cookie
     },
     MONGODB_URL: process.env.MONGODB_URL ?? "",
-    // cloudinary: {
-    //     cloud_name: process.env.cloudinary_cloud_name ?? "",
-    //     api_key: process.env.cloudinary_api_key ?? "",
-    //     api_secret: process.env.cloudinary_api_secret ?? "",
-    // },
+    cloudinary: {
+        cloud_name: process.env.cloudinary_cloud_name ?? "",
+        api_key: process.env.cloudinary_api_key ?? "",
+        api_secret: process.env.cloudinary_api_secret ?? "",
+    },
 } as const;
