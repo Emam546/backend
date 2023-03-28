@@ -23,7 +23,10 @@ async function UploadData() {
         }
         return comps;
     }
+    console.log("Upload Companies collection");
     const comps = await getCompany();
+    console.log("Finish Upload Companies collection");
+    console.log("Upload Films Data");
     for (const val of data) {
         const preFilm = await FilmDB.findOne({ name: val.name });
         if (!preFilm) {
@@ -38,6 +41,7 @@ async function UploadData() {
             await newFilm.save();
         }
     }
+    console.log("Finish Upload Films Data");
 }
 
 const pages: Record<string, string[]> = {
@@ -75,12 +79,12 @@ const pages: Record<string, string[]> = {
 };
 async function UploadPagesData() {
     console.log("Uploading pageData editions");
+    const films = await FilmDB.find({});
     for (const name in pages) {
-        console.log(`  Upload ${name}`);
+        console.log(" ",`Upload ${name}`);
         const res = await EditTitlesDB.findOne({ name });
         if (res) continue;
         const editions: mongoose.Types.ObjectId[] = [];
-        const films = await FilmDB.find({});
         for (const titleName of pages[name]) {
             const res = await new EditionDB({
                 name: titleName,
@@ -89,8 +93,7 @@ async function UploadPagesData() {
             editions.push(res._id);
         }
         await new EditTitlesDB({ name, editions }).save();
-        console.log(`  Finish Upload ${name}`);
-
+        console.log(`Finish Upload ${name}`);
     }
     console.log("Finish Uploading Home editions");
 }
@@ -98,8 +101,9 @@ async function UploadCompanyEditions() {
     console.log("Uploading Company editions");
     const companies = await CompanyDB.find({});
     for (const company of companies) {
+        console.log(" ", "Upload", company.name, "edition");
         const res = await EditTitlesDB.findOne({ name: company.name });
-        if (res) return;
+        if (res) continue;
         const films = await FilmDB.find({ company: company._id }).hint({
             company: 1,
         });
@@ -113,16 +117,16 @@ async function UploadCompanyEditions() {
                     false
                 ).map(({ _id }) => _id),
             }).save();
-            console.log(res);
             editions.push(res._id);
         }
         await new EditTitlesDB({ name: company.name, editions }).save();
+        console.log("   ", "Finish Upload", company.name, " edition");
     }
     console.log("Finish Uploading Company editions");
 }
 
 (async function () {
-    await connect(EnvVars.MONGODB_URL);
+    await connect(EnvVars.MONGODB_URL, true);
     await UploadData();
     await UploadPagesData();
     await UploadCompanyEditions();

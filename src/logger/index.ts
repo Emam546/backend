@@ -1,17 +1,15 @@
 import { NodeEnvs } from "@src/declarations/enums";
 import EnvVars from "@src/declarations/major/EnvVars";
 import { transports, format, createLogger, Logger } from "winston";
+import {dbName} from "@src/db/connect";
 import "winston-mongodb";
 let logger: Logger = createLogger({
-    transports: [
-        new transports.Console({}),
-    ],
-    format:format.combine(
+    transports: [new transports.Console({})],
+    format: format.combine(
         format.colorize(),
         format.simple(),
-        format.errors({stack:true})
-    )
-    
+        format.errors({ stack: true })
+    ),
 });
 if (EnvVars.nodeEnv == NodeEnvs.Production) {
     logger = createLogger({
@@ -19,6 +17,7 @@ if (EnvVars.nodeEnv == NodeEnvs.Production) {
             new transports.MongoDB({
                 level: "error",
                 db: EnvVars.MONGODB_URL,
+                dbName,
                 collection: "logs",
                 // format: format.metadata(),
             }),
@@ -26,8 +25,7 @@ if (EnvVars.nodeEnv == NodeEnvs.Production) {
         format: format.combine(
             format.json(),
             format.timestamp(),
-            format.errors({ stack: true }),
-            
+            format.errors({ stack: true })
         ),
     });
 }
