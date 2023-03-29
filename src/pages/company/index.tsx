@@ -3,7 +3,7 @@ import { LoaderFunctionArgs, useParams } from "react-router";
 import { getCompany } from "./api";
 import { useDispatch } from "react-redux";
 import { pageActions } from "../../store";
-import { getSourceImage,getSourceVideo } from "../../utils/index";
+import { getSourceImage } from "../../utils/index";
 import Titles from "../../components/Titles";
 import BackImg from "../../components/backImg";
 export const loader =

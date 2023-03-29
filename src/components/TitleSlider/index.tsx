@@ -7,7 +7,7 @@ import Img from "../Img";
 function FilmPreview({ film }: { film: Film }) {
     const { name, thumbnails } = film;
     const dispatch = useAppDispatch();
-    const [timeout, setOut] = useState<null | number>(null);
+    const [timeout, setOut] = useState<null | ReturnType<typeof setTimeout>>(null);
     return (
         <div
             onMouseEnter={(event) => {
