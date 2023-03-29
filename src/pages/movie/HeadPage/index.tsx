@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { PayUrl, getSourceUrl } from "../../../utils";
+import { PayUrl, getSourceImage } from "../../../utils";
 import classNames from "classnames";
 import { Link, useLocation } from "react-router-dom";
 import BtnSaveToWatchLater from "../../../components/savTowatchLater";
@@ -30,7 +30,7 @@ export default function Header({ film }: { film: Film }) {
         <header className="header relative ml-[6rem]">
             <div>
                 <img
-                    src={getSourceUrl(film.thumbnails.landscape)}
+                    src={getSourceImage(film.thumbnails.landscape)}
                     className="w-full aspect-video select-none"
                     alt="Failed"
                 />
@@ -42,7 +42,7 @@ export default function Header({ film }: { film: Film }) {
                     <div>
                         <div>
                             <img
-                                src={getSourceUrl(film.thumbnails.head)}
+                                src={getSourceImage(film.thumbnails.head)}
                                 alt=""
                                 className="max-w-full max-h-32"
                             />
@@ -99,8 +99,7 @@ export default function Header({ film }: { film: Film }) {
                                 <i className="fa-solid fa-play pr-2"></i>
                                 Subscribe to Watch
                             </Link>
-                            <BtnSaveToWatchLater id={film._id}/>
-
+                            <BtnSaveToWatchLater id={film._id} />
                         </div>
                     </div>
                 </div>

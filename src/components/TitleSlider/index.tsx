@@ -1,6 +1,6 @@
 import Slider from "../slider";
 import { useState } from "react";
-import { getSourceUrl } from "../../utils";
+import { getSourceImage } from "../../utils";
 import { Link } from "react-router-dom";
 import { ShowerActions, useAppDispatch } from "../../store";
 import Img from "../Img";
@@ -43,7 +43,7 @@ function FilmPreview({ film }: { film: Film }) {
                 className="w-full block"
             >
                 <Img
-                    src={getSourceUrl(thumbnails.portal)}
+                    src={getSourceImage(thumbnails.portal)}
                     alt={name}
                     className="relative after:text-center after:bg-black-off-2 after:content-[attr(alt)] after:absolute  after:top-0 after:left-0 after:w-full after:h-full after:flex after:justify-center after:items-center w-full hover:scale-125 transition-transform delay-[1s] duration-[2s] text-white/40 capitalize"
                 />

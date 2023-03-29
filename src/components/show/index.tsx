@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ShowerActions, useAppSelector } from "../../store";
 import "./style.scss";
 import { Fragment, useEffect, useRef } from "react";
-import { getSourceUrl } from "../../utils";
+import { getSourceImage } from "../../utils";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 export function SpanHeading(
@@ -67,14 +67,14 @@ export default function FilmPopUp() {
                 <Link to={`/movies/${showData.film.name}`}>
                     <div className="relative w-full aspect-video">
                         <img
-                            src={getSourceUrl(
+                            src={getSourceImage(
                                 showData.film.thumbnails.landscape
                             )}
                             alt={showData.film.name}
                             className="w-full"
                         />
                         <img
-                            src={getSourceUrl(showData.film.thumbnails.head)}
+                            src={getSourceImage(showData.film.thumbnails.head)}
                             alt=""
                             className="absolute bottom-2 left-2 max-w-[80%] max-h-[30%]"
                         />

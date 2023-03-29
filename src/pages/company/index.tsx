@@ -3,7 +3,7 @@ import { LoaderFunctionArgs, useParams } from "react-router";
 import { getCompany } from "./api";
 import { useDispatch } from "react-redux";
 import { pageActions } from "../../store";
-import { getSourceUrl } from "../../utils/index";
+import { getSourceImage,getSourceVideo } from "../../utils/index";
 import Titles from "../../components/Titles";
 import BackImg from "../../components/backImg";
 export const loader =
@@ -36,11 +36,11 @@ export default function Company() {
             <header className="header relative aspect-[16/5.7] overflow-hidden">
                 <BackImg
                     className="relative aspect-video bg-cover"
-                    src={getSourceUrl(company.thumbnail.main.bg)}
+                    src={getSourceImage(company.thumbnail.main.bg)}
                 >
                     {company.thumbnail.main.image && (
                         <img
-                            src={getSourceUrl(company.thumbnail.main.image)}
+                            src={getSourceImage(company.thumbnail.main.image)}
                             className="absolute max-w-full w-[60%] h-[60%] max-h-full top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2"
                         />
                     )}

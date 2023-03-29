@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment } from "react";
 import Slider from "./customSlider";
-import { PayUrl, getSourceUrl } from "../../utils";
+import { PayUrl, getSourceImage } from "../../utils";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Img from "../Img";
@@ -33,7 +33,7 @@ function FilmsSlider({
                             )}
                         >
                             <Img
-                                src={getSourceUrl(
+                                src={getSourceImage(
                                     film.thumbnails.headPortal ??
                                         film.thumbnails.landscape
                                 )}
@@ -87,7 +87,7 @@ export default function Header({ films }: { films: Film[] }) {
             <Link to={`/movies/${film.name}`}>
                 <BackImg
                     className="aspect-video bg-cover relative"
-                    src={getSourceUrl(film.thumbnails.landscape)}
+                    src={getSourceImage(film.thumbnails.landscape)}
                 >
                     <div className="w-full h-52 absolute bottom-0 left-0 bg-gradient-to-t from-black to-trans"></div>
                     <div className="w-1/3 h-full absolute top-0 left-0 bg-gradient-to-r from-black to-trans"></div>
@@ -102,7 +102,7 @@ export default function Header({ films }: { films: Film[] }) {
                         >
                             <div>
                                 <img
-                                    src={getSourceUrl(film.thumbnails.head)}
+                                    src={getSourceImage(film.thumbnails.head)}
                                     alt=""
                                     className="max-w-full max-h-32"
                                 />
@@ -162,7 +162,7 @@ export default function Header({ films }: { films: Film[] }) {
                                 <i className="fa-solid fa-play pr-2"></i>
                                 Watch Now
                             </Link>
-                            <BtnSaveToWatchLater id={film._id}/>
+                            <BtnSaveToWatchLater id={film._id} />
                         </div>
                     </div>
                 </div>

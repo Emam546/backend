@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getSourceUrl } from "../../../utils";
+import { getSourceImage, getSourceVideo } from "../../../utils";
 import Img from "../../../components/Img";
 
 export default function Companies({ data }: { data: Company[] }) {
@@ -16,7 +16,7 @@ export default function Companies({ data }: { data: Company[] }) {
                         >
                             <Link to={`/company/${name.split(" ").join("-")}`}>
                                 <video
-                                    src={getSourceUrl(thumbnail.home.video)}
+                                    src={getSourceVideo(thumbnail.home.video)}
                                     className="w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                                     autoPlay={true}
                                     loop={true}
@@ -24,7 +24,7 @@ export default function Companies({ data }: { data: Company[] }) {
                                     preload="true"
                                 ></video>
                                 <Img
-                                    src={getSourceUrl(thumbnail.home.image)}
+                                    src={getSourceImage(thumbnail.home.image)}
                                     alt={name}
                                     className="capitalize after:content-[attr(alt)] after:top-0 after:left-0 after:absolute after:w-full after:h-full after:bg-black-off-2 after:text-center text-white/60 absolute top-1/2 left-1/2 transition-opacity duration-500 group-hover:opacity-0  -translate-x-1/2 -translate-y-1/2 z-1"
                                 />

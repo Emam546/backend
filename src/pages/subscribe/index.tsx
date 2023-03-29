@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import "./style.scss";
 import { useLocalStorage } from "../../hooks";
 import { permTime } from "../../constants";
-import { getSourceUrl } from "../../utils";
+import { getSourceImage } from "../../utils";
 export default function Subscribe() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -40,7 +40,9 @@ export default function Subscribe() {
                         <div className="bg-black-off-2 border-white-off-1 border-2 border-solid flex items-center aspect-[9/12] w-36 max-w-full rounded-lg overflow-hidden">
                             <img
                                 className="w-full"
-                                src={getSourceUrl(query.data.thumbnails.portal)}
+                                src={getSourceImage(
+                                    query.data.thumbnails.portal
+                                )}
                                 alt=""
                             />
                         </div>

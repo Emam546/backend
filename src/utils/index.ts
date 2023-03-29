@@ -1,4 +1,6 @@
-import { domain } from "../constants";
+import { CloudinaryImage, CloudinaryVideo } from "@cloudinary/url-gen";
+
+// Render the image in a React component.
 
 export function hasOwnProperty<K extends PropertyKey, T>(
     obj: unknown,
@@ -6,8 +8,19 @@ export function hasOwnProperty<K extends PropertyKey, T>(
 ): obj is Record<K, T> {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-export function getSourceUrl(name: string) {
-    return new URL(`/src/${name}`, domain).toString();
+export function getSourceImage(id: string) {
+    const myImage = new CloudinaryImage(id, {
+        cloudName: "ddlnc8ycf",
+    });
+
+    return myImage.toURL();
+}
+export function getSourceVideo(id: string) {
+    const data = new CloudinaryVideo(id, {
+        cloudName: "ddlnc8ycf",
+    });
+
+    return data.toURL();
 }
 
 export function PayUrl(name: string, path?: string) {
