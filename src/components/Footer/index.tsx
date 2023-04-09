@@ -1,3 +1,5 @@
+import { getMainSourceUrl } from "../../utils";
+
 export default function Footer() {
     return (
         <footer className="footer mt-16 pb-10 ml-[6rem]">
@@ -102,7 +104,9 @@ export default function Footer() {
                         <div className="h-10">
                             <a href="">
                                 <img
-                                    src="/images/google-playstore.webp"
+                                    src={getMainSourceUrl(
+                                        "images/google-playstore.webp"
+                                    )}
                                     className="max-w-full max-h-full"
                                     alt=""
                                 />
@@ -111,7 +115,9 @@ export default function Footer() {
                         <div className="h-10">
                             <a href="">
                                 <img
-                                    src="/images/ios-appstore.webp"
+                                    src={getMainSourceUrl(
+                                        "images/ios-appstore.webp"
+                                    )}
                                     className="max-w-full max-h-full"
                                     alt=""
                                 />

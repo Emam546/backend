@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import "./style.scss";
 import { useLocalStorage } from "../../hooks";
 import { permTime } from "../../constants";
-import { getSourceImage } from "../../utils";
+import { getMainSourceUrl, getSourceImage } from "../../utils";
 export default function Subscribe() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -29,7 +29,7 @@ export default function Subscribe() {
                     <i className="fa-solid fa-xmark text-3xl font-light"></i>
                 </button>
                 <img
-                    src="/images/logo-d-plus-horizontal.svg"
+                    src="images/logo-d-plus-horizontal.svg"
                     className="pb-3"
                     alt="logo"
                 />
@@ -78,61 +78,73 @@ export default function Subscribe() {
                     <ul className="list-none flex flex-wrap gap-y-11 text-sm text-center text-white-off-1">
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/Dub_v2@2x.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/Dub_v2@2x.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>Experience Disney+ content in Arabic</p>
                             </div>
                         </li>
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/Dplus-Originals.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/Dplus-Originals.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>Exclusive originals</p>
                             </div>
                         </li>
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/Kids-Safe_v2@2x.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/Kids-Safe_v2@2x.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>Easy-to-use parental controls</p>
                             </div>
                         </li>
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/Kids-Safe_v2@2x.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/Kids-Safe_v2@2x.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>No ads or additional charges </p>
                             </div>
                         </li>
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/profiles_v2@2x.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/profiles_v2@2x.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>Create up to 7 profiles</p>
                             </div>
                         </li>
                         <li className="basis-1/2 sm:basis-1/3">
                             <div className="w-24 max-w-full mx-auto px-3">
-                                <img
-                                    src="/images/4-Devices_v2@2x.png"
-                                    className="aspect-square w-14 mb-4 mx-auto"
-                                    alt=""
-                                />
+                                <div className="aspect-square w-14 mb-4 mx-auto">
+                                    <img
+                                        src={getMainSourceUrl("images/4-Devices_v2@2x.png")}
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                                 <p>Stream on up to 4 devices at once</p>
                             </div>
                         </li>

@@ -22,7 +22,9 @@ export function getSourceVideo(id: string) {
 
     return data.toURL();
 }
-
+export function getMainSourceUrl(url:string) {
+    return `/${url}`;
+}
 export function PayUrl(name: string, path?: string) {
     const checkUrl = new URLSearchParams();
     checkUrl.set("content", name);

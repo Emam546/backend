@@ -57,6 +57,7 @@ function App() {
                         path="/"
                         element={<Home />}
                         loader={WrapFunct(homeLoader(queryClient))}
+                        
                     />
                     <Route
                         path="/search"
@@ -84,7 +85,7 @@ function App() {
                     />
                 </Route>
             </>
-        )
+        ),
     );
     return <RouterProvider router={router} />;
 }

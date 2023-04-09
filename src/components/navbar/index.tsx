@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./style.scss";
 import classNames from "classnames";
 import { NavLink, PathPattern, matchPath, useLocation } from "react-router-dom";
+import { getMainSourceUrl } from "../../utils";
 const paths: PathPattern<string>[] = [
     {
         path: "/",
@@ -16,7 +17,7 @@ const paths: PathPattern<string>[] = [
         path: "/series",
     },
     {
-        path:"/search",
+        path :"/search",
     }
 ];
 export default function NavBar() {
@@ -50,7 +51,8 @@ export default function NavBar() {
                 ></div>
                 <div className="absolute top-0 left-0 p-4 select-none">
                     <img
-                        src="/images/logo-d-plus-horizontal.svg"
+                        src={getMainSourceUrl("images/logo-d-plus-horizontal.svg")}
+                        
                         alt="logo"
                         className="w-full lg:w-auto"
                     />
