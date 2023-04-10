@@ -10,9 +10,7 @@ router.get("/", async (req, res) => {
 router.get("/:name", async (req, res) => {
     const company = await CompaniesDB.findOne({
         name: req.params.name.split("-").join(" "),
-    }).hint({
-        name: 1,
-    });
+    })
     if (!company)
         return res
             .status(404)
