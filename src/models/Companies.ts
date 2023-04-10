@@ -6,9 +6,9 @@ const schema = new mongoose.Schema<Company>({
         required: true,
     },
     thumbnail: {
-        type:Object,
+        type: Object,
         required: true,
     },
 });
-
+schema.index({ name: 1 });
 export default mongoose.model("company", schema);
