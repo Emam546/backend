@@ -34,7 +34,7 @@ const Page: NextPageWithLayout<ServerData> = ({ data }) => {
                     <i className="fa-solid fa-xmark text-3xl font-light"></i>
                 </button>
                 <img
-                    src="images/logo-d-plus-horizontal.svg"
+                    src={getMainSourceUrl("images/logo-d-plus-horizontal.svg")}
                     className="pb-3"
                     alt="logo"
                 />

@@ -1,10 +1,21 @@
-import Slider from "../slider";
+import Slider from "@src/components/slider";
 import { useState } from "react";
 import { getSourceImage } from "@src/utils";
 import { ShowerActions, useAppDispatch } from "@src/store";
-import Img from "../Img";
+import Img from "@src/components/Img";
 import Link from "next/link";
-function FilmPreview({ film }: { film: Film }) {
+
+export function FilmPreview({
+    film,
+    showout = 2700,
+    showoutTrans = 2000,
+    animationDelay = 1000,
+}: {
+    film: Film;
+    showout?: number;
+    showoutTrans?: number;
+    animationDelay?: number;
+}) {
     const { name, thumbnails } = film;
     const dispatch = useAppDispatch();
     const [timeout, setOut] = useState<null | ReturnType<typeof setTimeout>>(
@@ -32,7 +43,7 @@ function FilmPreview({ film }: { film: Film }) {
                                 film,
                             })
                         );
-                    }, 2700)
+                    }, showout)
                 );
             }}
             onMouseLeave={() => {
@@ -47,7 +58,11 @@ function FilmPreview({ film }: { film: Film }) {
                 <Img
                     src={getSourceImage(thumbnails.portal)}
                     alt={name}
-                    className="relative after:text-center after:bg-black-off-2 after:content-[attr(alt)] after:absolute  after:top-0 after:left-0 after:w-full after:h-full after:flex after:justify-center after:items-center w-full hover:scale-125 transition-transform delay-[1s] duration-[2s] text-white/40 capitalize"
+                    className="relative after:text-center after:bg-black-off-2 after:content-[attr(alt)] after:absolute  after:top-0 after:left-0 after:w-full after:h-full after:flex after:justify-center after:items-center w-full hover:scale-125 transition-transform text-white/40 capitalize"
+                    style={{
+                        transitionDuration: `${showoutTrans}ms`,
+                        transitionDelay: `${animationDelay}ms`,
+                    }}
                 />
             </Link>
         </div>
