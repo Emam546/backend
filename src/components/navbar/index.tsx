@@ -31,12 +31,10 @@ function NavLink({
     className?: string;
 }) {
     const router = useRouter();
-    if (
-        (router.asPath == p.as || router.asPath == p.href) &&
-        activeClassName &&
-        p.className
-    ) {
-        p.className += " " + activeClassName;
+    if ((router.asPath == p.as || router.asPath == p.href) && activeClassName) {
+        if (p.className)
+            p.className = p.className.trim() + " " + activeClassName;
+        else p.className = activeClassName;
     }
     return <Link {...p}>{p.children}</Link>;
 }
