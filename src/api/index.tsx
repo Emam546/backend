@@ -1,3 +1,4 @@
+/* eslint-disable node/no-process-env */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -6,7 +7,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { domain } from "@src/constants";
 import axios from "axios";
-import { NextApiRequest } from "next";
 import cache from "memory-cache";
 
 export async function getFilmData(name: string) {
@@ -36,7 +36,7 @@ export async function getCompaniesData() {
     const res = await axios.get(new URL(`/api/company`, domain).toString());
     return res.data.data as Company[];
 }
-export async function SearchHandler(query: any) {
+export async function SearchHandler(query: unknown) {
     const saveData = cache.get("search" + JSON.stringify(query));
     if (saveData) return JSON.parse(saveData);
     const rest = await axios.get(

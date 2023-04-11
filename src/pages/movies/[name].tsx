@@ -5,7 +5,7 @@ import axios from "axios";
 import { domain } from "@src/constants";
 import { useDispatch } from "react-redux";
 import { pageActions } from "@src/store";
-import Header from "./HeadPage/#index";
+import Header from "@src/components/MovieHeadPage";
 import { Title } from "@src/components/TitleSlider";
 import { useGetInfinityData, useGetFilmsQuery } from "@src/hooks";
 import { GetServerSideProps, NextPage } from "next";

@@ -40,7 +40,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
             },
         };
     });
-    console.log(paths);
     return {
         paths,
         fallback: false,
@@ -58,7 +57,6 @@ export const getStaticProps: GetStaticProps<ServerData> = async (ctx) => {
             props: { data },
         };
     } catch (err) {
-        console.error(err);
         return {
             notFound: true,
         };
