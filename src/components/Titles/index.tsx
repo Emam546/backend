@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Title, TitleSkeleton } from "../TitleSlider";
 import { getFilms, getTitles } from "./api";
 import { useGetInfinityData } from "../../hooks";
@@ -35,18 +35,21 @@ export default function Titles({ name }: { name: string }) {
     const query = useGetInfinityData(["titles", name], ({ pageParam = 0 }) =>
         getTitles(name, pageParam)
     );
+    const ref = useRef<HTMLDivElement>(null);
     useEffect(() => {
+        if (!ref.current) return;
         function scroll() {
+            if (!ref.current) return;
             const scrollState =
-                window.innerHeight + window.scrollY + 10 >=
-                document.body.offsetHeight;
+                window.innerHeight + window.scrollY >=
+                ref.current.offsetTop + ref.current.offsetHeight;
             if (scrollState) query.fetchNextPage();
         }
         window.addEventListener("scroll", scroll);
         return () => window.removeEventListener("scroll", scroll);
-    }, []);
+    }, [ref]);
     return (
-        <div>
+        <div ref={ref}>
             {query.data?.pages.map((titles, oi) => {
                 return titles.data.map(({ name, _id }, i) => {
                     return (
