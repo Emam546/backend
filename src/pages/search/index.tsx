@@ -92,7 +92,7 @@ function useDebounce<T>(value: T, time: number) {
     const [state, setState] = useState<T>(value);
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setState(state);
+            setState(value);
         }, time);
         return () => clearTimeout(timeout);
     }, [value]);
