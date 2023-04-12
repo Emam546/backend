@@ -88,6 +88,16 @@ function useIsStart() {
     }, []);
     return state;
 }
+function useDebounce<T>(value: T, time: number) {
+    const [state, setState] = useState<T>(value);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setState(state);
+        }, time);
+        return () => clearTimeout(timeout);
+    }, [value]);
+    return state;
+}
 function ShowData({ data, search }: { data: SearchData[]; search: string }) {
     const query = useQuery({
         queryKey: ["search", search],
@@ -131,6 +141,7 @@ const Page: NextPage<ServerData> = ({ data }) => {
     useEffect(() => {
         router.push("/search", { query: search && { s: search } });
     }, [search]);
+    const debounceSearch = useDebounce(search, 300);
     return (
         <section
             id="search"
@@ -141,7 +152,7 @@ const Page: NextPage<ServerData> = ({ data }) => {
             />
             <ShowData
                 data={data}
-                search={search as string}
+                search={debounceSearch as string}
             />
         </section>
     );
