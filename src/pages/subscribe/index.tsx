@@ -1,4 +1,4 @@
-import { getFilmData } from "@src/api";
+import { getFilmData } from "@serv/routes/film";
 import { useLocalStorage } from "@src/hooks";
 import { permTime } from "@src/constants";
 import { getMainSourceUrl, getSourceImage } from "@src/utils";
@@ -262,6 +262,10 @@ export const getServerSideProps: GetServerSideProps<ServerData> = async (
             props: {},
         };
     const data = await getFilmData(name);
+    if (!data)
+        return {
+            notFound: true,
+        };
     return {
         props: {
             data,

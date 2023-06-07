@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import axios from "axios";
 import { domain } from "@src/constants";
 import { useDispatch } from "react-redux";
@@ -9,19 +6,17 @@ import Header from "@src/components/MovieHeadPage";
 import { Title } from "@src/components/TitleSlider";
 import { useGetInfinityData, useGetFilmsQuery } from "@src/hooks";
 import { GetServerSideProps, NextPage } from "next";
-import { getFilmData } from "@src/api";
+import { getFilmData } from "@serv/routes/film";
 import { useRouter } from "next/router";
+import { serialize } from "@src/utils";
 
 async function getFilmMoreLike(_id: string, page: number, numFilms = 8) {
-    const res = await axios.get(
-        new URL(`/api/films/morelike/${_id}`, domain).toString(),
-        {
-            params: {
-                offset: page * numFilms,
-                limit: numFilms,
-            },
-        }
-    );
+    const res = await axios.get(`${domain}/api/films/morelike/${_id}`, {
+        params: {
+            offset: page * numFilms,
+            limit: numFilms,
+        },
+    });
     return {
         data: res.data.data as Film[],
         page: res.data.data.length != 0 ? page + 1 : page,
@@ -92,7 +87,11 @@ export const getServerSideProps: GetServerSideProps<ServerData> = async (
             notFound: true,
         };
     try {
-        const data = await getFilmData(name);
+        const data = serialize(await getFilmData(name).lean());
+        if (!data)
+            return {
+                notFound: true,
+            };
         return {
             props: {
                 film: data,

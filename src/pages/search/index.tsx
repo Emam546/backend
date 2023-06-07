@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { GetServerSideProps, NextPage } from "next";
@@ -50,13 +46,13 @@ function SearchInput({
     setSearch: Dispatch<SetStateAction<string>>;
 }) {
     const router = useRouter();
-    const inpref = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     return (
         <div className="mb-5">
             <div className="flex items-center bg-black-off-2 px-5 text-white-off-1">
                 <i className="fa-solid fa-magnifying-glass text-2xl"></i>
                 <input
-                    ref={inpref}
+                    ref={inputRef}
                     type="text"
                     className="flex-1 text-lg px-5 py-4 bg-black-off-2 self-stretch focus:outline-none"
                     placeholder="Movies, shows and more"
@@ -65,12 +61,12 @@ function SearchInput({
                     }}
                     defaultValue={router.query.s}
                 />
-                {inpref.current && inpref.current.value != "" && (
+                {inputRef.current && inputRef.current.value != "" && (
                     <button
                         className="cursor-pointer mx-5"
                         onClick={() => {
-                            if (!inpref.current) return;
-                            inpref.current.value = "";
+                            if (!inputRef.current) return;
+                            inputRef.current.value = "";
                             setSearch("");
                         }}
                     >

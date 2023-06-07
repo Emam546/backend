@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useEffect, useRef } from "react";
 import { Title, TitleSkeleton } from "../TitleSlider";
 import { getFilms, getTitles } from "./api";

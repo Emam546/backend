@@ -84,7 +84,7 @@ export default function Slider({
     const slider = container.current;
     useEffect(() => {
         if (slider) forceUpdate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slider]);
     return (
         <>

@@ -2,8 +2,9 @@ import Header from "@src/components/HeadPage";
 import Titles from "@src/components/Titles";
 import Companies from "@src/components/companies";
 import { GetServerSideProps, NextPage } from "next";
-import { PageDataType, getCompaniesData, getPageData } from "@src/api";
-
+import { getCompaniesData } from "@serv/routes/company";
+import { PageDataType, getPageData } from "@serv/routes/pages";
+import { serialize } from "@src/utils";
 interface ServerData extends PageDataType {
     companies: Company[];
 }
@@ -20,12 +21,17 @@ const Home: NextPage<ServerData> = ({ headerfilms, companies }) => {
     );
 };
 export const getServerSideProps: GetServerSideProps<ServerData> = async () => {
-    const companies = await getCompaniesData();
-    const data = await getPageData("home");
+    const companies = serialize(await getCompaniesData().lean());
+    const data = serialize(await getPageData("home"));
+    if (!data || !companies)
+        return {
+            notFound: true,
+        };
+
     return {
         props: {
             ...data,
-            companies,
+            companies: companies,
         },
     };
 };

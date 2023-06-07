@@ -1,39 +1,27 @@
 /* eslint-disable node/no-process-env */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { domain } from "@src/constants";
 import axios from "axios";
 import cache from "memory-cache";
-
+import { PageDataType } from "@serv/routes/pages";
 export async function getFilmData(name: string) {
-    const res = await axios.get(
-        new URL(`/api/films/${name}`, domain).toString()
-    );
+    const res = await axios.get(`${domain}/api/films/${name}`);
     return res.data.data as Film;
 }
-export interface PageDataType {
-    headerfilms: Film[];
-}
+
 export async function getPageData(name: string) {
-    const res = await axios.get(
-        new URL(`/api/pages/${name}`, domain).toString()
-    );
+    const res = await axios.get(`${domain}/api/pages/${name}`);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
     return res.data.data as PageDataType;
 }
 
 export async function getCompanyData(name: string) {
-    const res = await axios.get(
-        new URL(`/api/company/${name}`, domain).toString()
-    );
+    const res = await axios.get(`${domain}/api/company/${name}`);
     return res.data.data as Company;
 }
 export async function getCompaniesData() {
-    const res = await axios.get(new URL(`/api/company`, domain).toString());
+    const res = await axios.get(`${domain}/api/company`);
     return res.data.data as Company[];
 }
 export async function SearchHandler(query: unknown) {

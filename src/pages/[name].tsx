@@ -1,6 +1,7 @@
-import { PageDataType, getPageData } from "@src/api";
+import { getPageData, PageDataType } from "@serv/routes/pages";
 import Header from "@src/components/HeadPage";
 import Titles from "@src/components/Titles";
+import { serialize } from "@src/utils";
 import { GetServerSideProps, NextPage } from "next";
 
 interface ServerData {
@@ -27,7 +28,12 @@ export const getServerSideProps: GetServerSideProps<ServerData> = async (
             notFound: true,
         };
     try {
-        const data = await getPageData(name);
+        const data = serialize(await getPageData(name));
+        if (!data)
+            return {
+                notFound: true,
+            };
+
         return {
             props: {
                 data,

@@ -1,11 +1,11 @@
-import { getSourceImage } from "@src/utils/index";
+import { getSourceImage, serialize } from "@src/utils/index";
 import Titles from "@src/components/Titles";
 import BackImg from "@src/components/backImg";
-import { getCompaniesData, getCompanyData } from "@src/api";
+import { getCompaniesData, getCompanyData } from "@serv/routes/company";
 import { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
 interface ServerData {
-    data: Awaited<ReturnType<typeof getCompanyData>>;
+    data: Company;
 }
 const Page: NextPage<ServerData> = ({ data }) => {
     const company = data;
@@ -52,7 +52,11 @@ export const getStaticProps: GetStaticProps<ServerData> = async (ctx) => {
             notFound: true,
         };
     try {
-        const data = await getCompanyData(name);
+        const data = serialize(await getCompanyData(name));
+        if (!data)
+            return {
+                notFound: true,
+            };
         return {
             props: { data },
         };

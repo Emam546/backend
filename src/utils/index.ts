@@ -1,7 +1,6 @@
 import { CloudinaryImage, CloudinaryVideo } from "@cloudinary/url-gen";
 import IURLConfig from "@cloudinary/url-gen/config/interfaces/Config/IURLConfig";
-
-// Render the image in a React component.
+import { Document } from "mongoose";
 
 export function hasOwnProperty<K extends PropertyKey, T>(
     obj: unknown,
@@ -40,3 +39,7 @@ export function PayUrl(name: string, path?: string) {
     if (path) checkUrl.set("ref", path);
     return `/subscribe/?${checkUrl.toString()}`;
 }
+
+export const serialize = <T>(val: T): T => {
+    return JSON.parse(JSON.stringify(val));
+};
