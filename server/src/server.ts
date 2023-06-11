@@ -25,7 +25,12 @@ app.use(
 );
 // Security
 if (EnvVars.nodeEnv === NodeEnvs.Production) {
-    app.use(helmet());
+    app.use(
+        helmet({
+            contentSecurityPolicy: false,
+            crossOriginEmbedderPolicy: false,
+        })
+    );
 }
 
 // **** Add API routes **** //

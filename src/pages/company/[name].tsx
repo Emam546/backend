@@ -1,9 +1,14 @@
+import EnvVars from "@serv/declarations/major/EnvVars";
+import connect from "@serv/db/connect";
 import { getSourceImage, serialize } from "@src/utils/index";
 import Titles from "@src/components/Titles";
 import BackImg from "@src/components/backImg";
 import { getCompaniesData, getCompanyData } from "@serv/routes/company";
 import { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { configEnv } from "@src/utils/config";
+import { NodeEnvs } from "@serv/declarations/enums";
+
 interface ServerData {
     data: Company;
 }
@@ -32,6 +37,8 @@ const Page: NextPage<ServerData> = ({ data }) => {
     );
 };
 export const getStaticPaths: GetStaticPaths = async () => {
+    configEnv(NodeEnvs.Production);
+    await connect(process.env.MONGODB_URL as string);
     const companies = await getCompaniesData();
     const paths = companies.map((data) => {
         return {

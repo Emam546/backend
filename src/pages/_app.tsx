@@ -29,10 +29,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             <QueryClientProvider client={queryClient}>
                 <Provider store={store}>
                     {Component.getLayout(<Component {...pageProps} />)}
-                    <Script
-                        src="https://kit.fontawesome.com/7d5b5d6967.js"
-                        crossOrigin="anonymous"
-                    ></Script>
+                    
                 </Provider>
             </QueryClientProvider>
         );
@@ -40,13 +37,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
+                
                 <SharedLayout>
                     <Component {...pageProps} />
                 </SharedLayout>
-                <Script
-                    src="https://kit.fontawesome.com/7d5b5d6967.js"
-                    crossOrigin="anonymous"
-                ></Script>
+                
             </Provider>
         </QueryClientProvider>
     );

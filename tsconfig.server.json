@@ -9,15 +9,10 @@
         "paths": {
             "@serv/*": [
                 "./server/src/*"
-            ],
-            "@src/*": [
-                "./src/*"
-            ],
+            ]
         }
     },
     "include": [
-        "server",
-        "src",
-        "./build.ts"
+        "server"
     ]
 }

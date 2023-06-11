@@ -12,9 +12,13 @@ export function getSourceImage(id: string, options?: IURLConfig) {
     const myImage = new CloudinaryImage(
         id,
         {
-            cloudName: "ddlnc8ycf",
+            cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
         },
-        options
+        {
+            ...options,
+            analytics: false,
+            secure: false,
+        }
     );
 
     return myImage.toURL();

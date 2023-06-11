@@ -7,6 +7,8 @@ import { permTime } from "../constants";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 import HeadMain from "./head";
+import Head from "next/head";
+import Script from "next/script";
 
 export function SharedLayout({ children }: { children: ReactNode }) {
     const [lastTime] = useLocalStorage("lastTime", {
@@ -31,6 +33,10 @@ export function SharedLayout({ children }: { children: ReactNode }) {
             {children}
             <FilmPopUp />
             <Footer />
+            <Script
+                src="https://kit.fontawesome.com/7d5b5d6967.js"
+                crossOrigin="anonymous"
+            ></Script>
         </>
     );
 }

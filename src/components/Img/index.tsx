@@ -9,6 +9,7 @@ export default function Img({
         if (!ref.current || !src) return;
         const lastState = ref.current.style.display;
         const img = new Image();
+        
         img.onload = () => {
             if (!ref.current) return;
             ref.current.src = img.src;

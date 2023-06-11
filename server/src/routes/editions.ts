@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Router } from "express";
 import EditionDB from "@serv/models/editions";
 import Validator, { parseRules } from "validator-checker-js";

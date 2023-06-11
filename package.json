@@ -7,7 +7,7 @@
     "build:server": "./node_modules/.bin/ts-node build.ts --project tsconfig.server.json",
     "build:next": "next build",
     "build": "npm run build:server && npm run build:next",
-    "start": "node -r module-alias/register ./dist/server/src --env=production",
+    "start": "node -r module-alias/register ./dist --env=production",
     "lint": "next lint",
     "lint:server": "npx eslint -c server/.eslintrc.json --ext .ts server/src/"
   },
@@ -47,7 +47,7 @@
     "sass": "^1.61.0",
     "tailwindcss": "3.3.1",
     "uuid": "^9.0.0",
-    "validator-checker-js": "^1.0.3",
+    "validator-checker-js": "^1.0.6",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.1"
   },
@@ -94,8 +94,7 @@
     "exec": "./node_modules/.bin/ts-node --project tsconfig.server.json --files -r tsconfig-paths/register ./server/src"
   },
   "_moduleAliases": {
-    "@serv": "dist/server/src",
-    "@src": "dist/src"
+    "@serv": "dist"
   },
   "engines": {
     "node": ">=11.0.0"

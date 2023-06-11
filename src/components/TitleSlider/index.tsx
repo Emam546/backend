@@ -72,7 +72,6 @@ function FilmsSkeleton() {
     return (
         <div className="w-full flex items-stretch gap-3 overflow-hidden pr-32 max-w-full">
             {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 [...new Array(8)].map((_, i) => {
                     return (
                         <div
