@@ -5,19 +5,25 @@ import { GetServerSideProps, NextPage } from "next";
 import { getCompaniesData } from "@serv/routes/company";
 import { PageDataType, getPageData } from "@serv/routes/pages";
 import { serialize } from "@src/utils";
+import Head from "next/head";
 interface ServerData extends PageDataType {
     companies: Company[];
 }
 
 const Home: NextPage<ServerData> = ({ headerfilms, companies }) => {
     return (
-        <section className="home">
-            <Header films={headerfilms} />
-            <main className="ml-[6rem] max-w-full">
-                <Companies data={companies} />
-                <Titles name={"home"} />
-            </main>
-        </section>
+        <>
+            <Head>
+                <title>Disney+ | More than you{"'"}d ever imagine</title>
+            </Head>
+            <section className="home">
+                <Header films={headerfilms} />
+                <main className="ml-[6rem] max-w-full">
+                    <Companies data={companies} />
+                    <Titles name={"home"} />
+                </main>
+            </section>
+        </>
     );
 };
 export const getServerSideProps: GetServerSideProps<ServerData> = async () => {

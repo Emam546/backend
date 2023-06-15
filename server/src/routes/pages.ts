@@ -6,16 +6,20 @@ import FilmDB from "@serv/models/film";
 
 // **** Init **** //
 const router = Router();
-const pages = ["home", "originals", "series", "movies"];
-export async function getPageData(name: string) {
-    const editions = pages.some((val) => val == name);
-    if (!editions) return null;
-    const films = await FilmDB.aggregate([{ $sample: { size: 7 } }]);
+export type PageType = "home" | "originals" | "series" | "movies";
+export const pages: PageType[] = ["home", "originals", "series", "movies"];
+export function isPageTitle(name: unknown): name is PageType {
+    return pages.some((v) => v == name);
+}
 
+export async function getPageData(name: string) {
+    if (!isPageTitle(name)) return null;
+    const films = await FilmDB.aggregate([{ $sample: { size: 7 } }]);
     return {
         headerfilms: films,
     };
 }
+
 export interface PageDataType {
     headerfilms: Film[];
 }

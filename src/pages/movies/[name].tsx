@@ -9,6 +9,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getFilmData } from "@serv/routes/film";
 import { useRouter } from "next/router";
 import { serialize } from "@src/utils";
+import Head from "next/head";
 
 async function getFilmMoreLike(_id: string, page: number, numFilms = 8) {
     const res = await axios.get(`${domain}/api/films/morelike/${_id}`, {
@@ -58,24 +59,29 @@ const Movie: NextPage<ServerData> = ({ film }) => {
     if (query.isLoading || query.isError) return null;
 
     return (
-        <section className="movie">
-            <Header film={query.data} />
-            <div className="ml-[6rem] my-5">
-                <div className="pb-6 border-b-4 border-solid border-[#252833] mb-7 flex">
-                    <h1
-                        className="cursor-pointer text-xl font-bold"
-                        onClick={() => {
-                            document
-                                .getElementById("morelikethis")
-                                ?.scrollIntoView({ behavior: "smooth" });
-                        }}
-                    >
-                        More Like This
-                    </h1>
+        <>
+            <Head>
+                <title>{film.name} - Disney +</title>
+            </Head>
+            <section className="movie">
+                <Header film={query.data} />
+                <div className="ml-[6rem] my-5">
+                    <div className="pb-6 border-b-4 border-solid border-[#252833] mb-7 flex">
+                        <h1
+                            className="cursor-pointer text-xl font-bold"
+                            onClick={() => {
+                                document
+                                    .getElementById("morelikethis")
+                                    ?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                        >
+                            More Like This
+                        </h1>
+                    </div>
+                    <CustomSlider _id={query.data._id} />
                 </div>
-                <CustomSlider _id={query.data._id} />
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 export const getServerSideProps: GetServerSideProps<ServerData> = async (

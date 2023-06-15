@@ -5,6 +5,7 @@ import { SearchHandler } from "@src/api";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Img from "@src/components/Img";
+import Head from "next/head";
 interface SearchData {
     Title: string;
     Year: string;
@@ -139,18 +140,23 @@ const Page: NextPage<ServerData> = ({ data }) => {
     }, [search]);
     const debounceSearch = useDebounce(search, 300);
     return (
-        <section
-            id="search"
-            className="ml-[6rem] pt-10 pr-5 min-h-screen"
-        >
-            <SearchInput
-                setSearch={setSearch as Dispatch<SetStateAction<string>>}
-            />
-            <ShowData
-                data={data}
-                search={debounceSearch as string}
-            />
-        </section>
+        <>
+            <Head>
+                <title>Disney+ | The greatest stories, all in one place</title>
+            </Head>
+            <section
+                id="search"
+                className="ml-[6rem] pt-10 pr-5 min-h-screen"
+            >
+                <SearchInput
+                    setSearch={setSearch as Dispatch<SetStateAction<string>>}
+                />
+                <ShowData
+                    data={data}
+                    search={debounceSearch as string}
+                />
+            </section>
+        </>
     );
 };
 

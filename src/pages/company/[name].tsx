@@ -8,6 +8,7 @@ import { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { configEnv } from "@src/utils/config";
 import { NodeEnvs } from "@serv/declarations/enums";
+import Head from "next/head";
 
 interface ServerData {
     data: Company;
@@ -15,25 +16,32 @@ interface ServerData {
 const Page: NextPage<ServerData> = ({ data }) => {
     const company = data;
     return (
-        <section className="company">
-            <header className="header relative aspect-[16/5.7] overflow-hidden">
-                <BackImg
-                    className="relative aspect-video bg-cover"
-                    src={getSourceImage(company.thumbnail.main.bg)}
-                >
-                    {company.thumbnail.main.image && (
-                        <img
-                            src={getSourceImage(company.thumbnail.main.image)}
-                            className="absolute max-w-full w-[60%] h-[60%] max-h-full top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2"
-                            alt=""
-                        />
-                    )}
-                </BackImg>
-            </header>
-            <main className="ml-[6rem]">
-                <Titles name={company.name} />
-            </main>
-        </section>
+        <>
+            <Head>
+                <title>Disney+ | The greatest stories, all in one place</title>
+            </Head>
+            <section className="company">
+                <header className="header relative aspect-[16/5.7] overflow-hidden">
+                    <BackImg
+                        className="relative aspect-video bg-cover"
+                        src={getSourceImage(company.thumbnail.main.bg)}
+                    >
+                        {company.thumbnail.main.image && (
+                            <img
+                                src={getSourceImage(
+                                    company.thumbnail.main.image
+                                )}
+                                className="absolute max-w-full w-[60%] h-[60%] max-h-full top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                alt=""
+                            />
+                        )}
+                    </BackImg>
+                </header>
+                <main className="ml-[6rem]">
+                    <Titles name={company.name} />
+                </main>
+            </section>
+        </>
     );
 };
 export const getStaticPaths: GetStaticPaths = async () => {
