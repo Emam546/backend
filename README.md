@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Disney plus Clone
+
+Developed a Disney clone website using Next.js, a popular React framework known for its server-side rendering capabilities, ensuring fast loading times and optimal performance..
+
+![Screenshot](screenshots/1.png)
+![Screenshot](screenshots/4.png)
+## Live Demo
+
+You can access the live demo [here](https://disney-olj2.onrender.com/).
+
+## Description
+
+The Disney clone website is a project developed using Next.js, Express.js, Tailwind CSS, and MongoDB. It aims to create a replica of the Disney website, offering users an immersive experience reminiscent of the magical world of Disney. By leveraging Next.js for server-side rendering, the website ensures fast loading times and optimal performance..
+
+## Features
+
+- Server-Side Rendering: Next.js allows for server-side rendering, enabling the website to load quickly and provide a seamless user experience. This ensures that users can navigate through the website and explore Disney-themed content without long loading times.
+
+- Express.js Backend: The project utilizes Express.js as the backend framework, providing a robust and flexible server environment. Express.js enables efficient routing, handling of API requests, and data management.
+
+- Tailwind CSS Styling: Tailwind CSS is employed for styling the website, offering a utility-first approach that allows for quick and consistent design implementation. With Tailwind CSS, creating visually appealing and responsive UI components becomes more streamlined.
+
+- MongoDB Database: The website utilizes MongoDB as the database system, providing a scalable and flexible solution for storing and retrieving data. MongoDB's document-based structure allows for easy management of Disney-related content, such as movies, characters, and images.
+
+- Disney-themed Content: The website offers a wide range of Disney-themed content, including movie information, character details, and images. Users can explore and interact with various Disney elements, bringing the magical world of Disney to life.
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```shell
+   git clone https://github.com/Emam546/disney_plus_films
+   ```
+2. Install the dependencies:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+   ```shell
+   npm install
+   ```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3. Start the development server:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```shell
+   npm dev
+   ```
+| Route                | Description                                    |
+|----------------------|------------------------------------------------|
+| /                    | Home page of the website                        |
+| /_app                | Main application page                           |
+| /[name]              | Dynamic route for specific content              |
+| /404 (404 ms)        | Error page displayed for invalid routes         |
+| /api/search          | API route for searching functionality           |
+| /company/[name]      | Dynamic route for displaying company details     |
+| /movies/[name]       | Dynamic route for displaying movie details       |
+****
